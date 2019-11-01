@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -10,4 +10,40 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+} */
+
+.nav-md .container.body .right_col {
+  height: 1000px !important;
 }
+
+.react-datepicker {
+  font-size: 1.3rem !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 1.5rem !important;
+}
+
+.react-datepicker__header {
+  padding-top: 6px !important;
+}
+
+.react-datepicker__navigation {
+  top: 13px !important;
+}
+
+.react-datepicker__day-name, .react-datepicker__day {
+  margin: 0.5rem !important;
+}
+
+.form-control {
+  border-radius: .25rem!important;
+ }
+ 
+ .form-control:focus {
+  /* border-radius: .25rem!important;*/
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+ }
