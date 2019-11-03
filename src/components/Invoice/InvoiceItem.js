@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class InvoiceItem extends Component {
     render() {
         return (
             <tr>
-                <td>1</td>
-                <td>09:30 SA</td>
-                <td>Nguyễn Kiệt Nà</td>
-                <td>#100000</td>
-                <td>V001</td>
-                <td>1.000.000 VNĐ</td>
-                <td>
-                    <a href="<?= base_url($val['chitiet']) ?>" className="btn btn-info">Xem chi tiết <i
-                        className="fa fa-eye"></i></a>
-                </td>
+                <td>{ this.props.pos + 1 }</td>
+                <td>{ moment(this.props.value.checkOut).format("DD/MM/YY hh:mm ") }</td>
+                <td>{ this.props.value.user.firstName + ' ' + this.props.value.user.lastName }</td>
+                <td>#<a href={ this.props.value.invoicePdf }>{ this.props.value.id }</a></td>
+                <td>{ this.props.value.room.name }</td>
+                <td>{ this.props.value.totalPrice } VNĐ</td>
             </tr>
         );
     }

@@ -28,9 +28,9 @@ class App extends Component {
         <div className="main_container">
           <SideBar />
           <TopNav />
-          {/* <Invoice /> */}
+          <Invoice />
           {/* <Room /> */}
-          <Item />
+          {/* <Item /> */}
           <Footer />
         </div>
       </div>

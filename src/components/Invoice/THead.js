@@ -11,7 +11,6 @@ class THead extends Component {
                     <th>Hóa đơn</th>
                     <th>Phòng</th>
                     <th>Tổng tiền</th>
-                    <th></th>
                 </tr>
             </thead>
         );

@@ -16,7 +16,6 @@ class TBody extends Component {
     }
 
     render() {
-        // console.log(this.props.itemData.items);
         return (
             <tbody>
                {
@@ -41,7 +40,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchItemList: () =>  dispatch(actions.fetchItemList())
-    
     }
 }
 

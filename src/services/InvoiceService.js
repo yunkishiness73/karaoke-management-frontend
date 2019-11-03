@@ -1,25 +1,30 @@
 import BaseService from './BaseService';
 import * as AppConstant from '../constants/constants';
 
-class ItemService extends BaseService {
+class InvoiceService extends BaseService {
     constructor(props) {
         super(props);
         this.baseURL = AppConstant.API_URL;
-        this.requestURL = this.baseURL + '/items';
+        this.requestURL = this.baseURL + '/invoices';
         let token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraWV0bmd1eWVuNzM5OEBnbWFpbC5jb20iLCJleHAiOjE1NzI4MTE2NzQsImlhdCI6MTU3Mjc5MzY3NH0.V7jEbQyGjnn7hfbfk81n-A6KZgzMhOGay_URuAfqaIl5ZOJcK_kwyrKFwH6Hh91FsS4Ok5W23RI_ArFli1dkyA';
         this.setHeader('Authorization', token);
     }
 
-    getItems(keyword) {
+    getInvoices(criteria) {
         let endpoint = '';
+        let { keyword, datepicker } = criteria;
 
-        if (keyword) {
-            console.log('keyword');
+        console.log(endpoint.length);
+
+        if (keyword) 
             endpoint = `${this.requestURL}?keyword=${keyword}`;
-            return this.get(endpoint);
-        }
     
-        return this.get(this.requestURL);
+        if (datepicker) {
+            endpoint = endpoint ? `${endpoint}&datepicker=${datepicker}`: `${this.requestURL}?datepicker=${datepicker}`;
+        }
+          
+
+        return endpoint ? this.get(endpoint) : this.get(this.requestURL);
     }
 
     save(payload) {
@@ -44,4 +49,4 @@ class ItemService extends BaseService {
     
 }
 
-export default new ItemService();
+export default new InvoiceService();

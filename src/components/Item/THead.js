@@ -6,7 +6,9 @@ class THead extends Component {
             <thead>
                 <tr><th colspan="2">Sản phẩm</th>
                     <th>Đơn vị tính</th>
-                    <th>Giá</th> </tr>
+                    <th>Giá</th> 
+                    <th></th>
+                </tr>
             </thead>
         );
     }

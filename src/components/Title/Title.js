@@ -8,7 +8,7 @@ class Title extends Component {
     
     render() {
         return (
-            <div className="col-sm-1 title">
+            <div className={ this.props.colspan + ' ' + 'title'}>
                     { this.props.title }
             </div>
         );

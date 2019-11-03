@@ -53,12 +53,11 @@ class BaseService {
         });
     }
 
-    delete(endpoint, payload) {
+    delete(endpoint) {
         return this.service.request({
             method: 'DELETE',
             url: endpoint,
             responseType: 'json',
-            data: payload
         });
     }
 }
