@@ -54,12 +54,11 @@ class Room extends Component {
     
 
     render() {
-        console.log();
-        console.log('render');
+        console.log(this.props.match);
         return (
             <div className="card-deck right_col">
                 <div class="row">
-                    <Title title="Rooms"/>
+                    <Title colspan="col-sm-1" title="Rooms"/>
                     <Filter />
                 </div>
                 <hr />

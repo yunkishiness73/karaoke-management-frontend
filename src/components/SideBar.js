@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import userImage from './images/user.png'
+import { NavLink } from 'react-router-dom';
 
 class SideBar extends Component {
+
+    getNavLinkClass = path => {
+       console.log(this.props.match);
+    }
+
     render() {
         return (
             <div className="col-md-3 left_col">
@@ -24,10 +30,10 @@ class SideBar extends Component {
                     <div id="sidebar-menu" className="main_menu_side hidden-print main_menu">
                         <div className="menu_section">
                             <ul className="nav side-menu">
-                                <li><a><i className="fa fa-home" /> Quản Lý Phòng</a></li>
-                                <li><a><i className="fa fa-cutlery" /> Quản Lý Thực Đơn</a></li>
-                                <li><a><i className="fa fa-edit" /> Quản Lý Hóa Đơn</a></li>
-                                <li><a><i className="fa fa-bar-chart-o" />Thống Kê Doanh Thu</a></li>
+                                <li className={ this.getNavLinkClass('/') }><NavLink to="/"><i className="fa fa-home" /> Quản Lý Phòng</NavLink></li>
+                                <li><NavLink to="/items"><i className="fa fa-cutlery" /> Quản Lý Thực Đơn</NavLink></li>
+                                <li><NavLink to="/invoices"><i className="fa fa-edit" /> Quản Lý Hóa Đơn</NavLink></li>
+                                <li><NavLink to="/invoices/summarize"><i className="fa fa-bar-chart-o" />Thống Kê Doanh Thu</NavLink></li>
                             </ul>
                         </div>
                     </div>

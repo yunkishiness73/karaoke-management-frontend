@@ -1,9 +1,10 @@
-import { FETCH_INVOICE_LIST, GET_DATEPICKER, GET_KEYWORD } from '../constants/invoice';
+import { FETCH_INVOICE_LIST, GET_DATEPICKER, GET_KEYWORD, FETCH_SUMMARY_INVOICE_LIST } from '../constants/invoice';
 import { startOfMinute } from 'date-fns/esm';
 
 const initialState = {
     keyword: '',
-    datepicker: ''
+    datepicker: '',
+    statistics: []
 }
 
 const fetchInvoiceList = (state, action) => {
@@ -27,28 +28,10 @@ const getKeyword = (state, action) => {
     }
 }
 
-const loadEditItem = (state, action) => {
+const fetchSummaryInvoiceList = (state, action) => {
     return {
-        ...state,
-        editItem: action.item
-    }
-}
-
-const showItemForm = (state, action) => {
-    return {
-        ...state,
-        showItemForm: true,
-        showAddItemButton: false
-    }
-}
-
-const hideItemForm = (state, action) => {
-    return {
-        ...state,
-        showItemForm: false,
-        showAddItemButton: true,
-        editItem: {}
-
+        ...state, 
+        statistics: action.statistics
     }
 }
 
@@ -60,6 +43,8 @@ const reducer = (state = initialState, action) => {
             return getDatePicker(state, action);
         case GET_KEYWORD:
             return getKeyword(state, action);
+        case FETCH_SUMMARY_INVOICE_LIST:
+            return fetchSummaryInvoiceList(state, action);
         default:
             return state;
     }
