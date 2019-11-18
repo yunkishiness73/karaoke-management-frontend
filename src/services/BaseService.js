@@ -1,5 +1,4 @@
 import axios from 'axios';
-import AppConstant from '../constants/constants';
 
 class BaseService {
     constructor(props) {
@@ -11,6 +10,7 @@ class BaseService {
     }
 
     setHeader(key, value) {
+        console.log('set');
         this.service.defaults.headers.common[key] = value;
     }
 
@@ -22,9 +22,16 @@ class BaseService {
         return response;
     }
 
+    redirectTo = (document, path) => {
+        document.location = path;
+    };
+
     onError = error => {
         switch (error.response.status) {
             case 401:
+                // this.removeHeader('token');
+                // localStorage.removeItem('token');
+                // this.redirectTo(document, '/login');
                 break;
             default:
                 return Promise.reject(error);

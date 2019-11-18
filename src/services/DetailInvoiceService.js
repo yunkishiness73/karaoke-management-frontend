@@ -1,24 +1,11 @@
 import BaseService from './BaseService';
 import * as AppConstant from '../constants/constants';
 
-class ItemService extends BaseService {
+class DetailInvoiceService extends BaseService {
     constructor(props) {
         super(props);
         this.baseURL = AppConstant.API_URL;
-        this.requestURL = this.baseURL + '/items';
-        console.log('chay vao constructor');
-    }
-
-    getItems(keyword) {
-        let endpoint = '';
-
-        if (keyword) {
-            console.log('keyword');
-            endpoint = `${this.requestURL}?keyword=${keyword}`;
-            return this.get(endpoint);
-        }
-    
-        return this.get(this.requestURL);
+        this.requestURL = this.baseURL + '/detailInvoices';
     }
 
     save(payload) {
@@ -32,9 +19,9 @@ class ItemService extends BaseService {
         return this.post(this.requestURL, payload);
     }
 
-    deleteItemById(id) {
+    remove(id) {
         let endpoint = '';
-        console.log(id);
+
         if (id)
             endpoint = `${this.requestURL}/${id}`;
         
@@ -43,4 +30,4 @@ class ItemService extends BaseService {
     
 }
 
-export default new ItemService();
+export default new DetailInvoiceService();

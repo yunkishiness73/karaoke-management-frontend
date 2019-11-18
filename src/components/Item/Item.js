@@ -3,6 +3,7 @@ import LeftCol from './LeftCol/LeftCol';
 import RightCol from './RightCol/RightCol';
 import * as actions from '../../actions/item';
 import { connect } from 'react-redux';
+import ItemService from '../../services/ItemService';
 
 class Item extends Component {
     constructor(props) {
@@ -17,8 +18,14 @@ class Item extends Component {
             return <RightCol />
     }
 
+    componentWillMount() {
+        const token = localStorage.getItem('token');
+        
+        if (token) 
+            ItemService.setHeader('Authorization', `Bearer ` + JSON.parse(token));
+    }
+
     render() {
-        console.log('render item');
         return (
             <div className="container-fluid mt-2 pt-2 right_col">
                 <div className="col-sm-12">

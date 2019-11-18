@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import TopNav from './components/TopNav';
-import Filter from './components/Filter';
 import SideBar from './components/SideBar';
 import Footer from './components/Footer';
+import Login from './components/Login/Login';
 import routes from './routes';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import Alert from './components/Alert/AlertInfo';
+import { connect } from 'react-redux';
 
-// import LineChart from './LineChart';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,33 +23,57 @@ class App extends Component {
   showContent = (routes) => {
     if (routes.length > 0) {
       return routes.map((route, key) => {
-        return (<Route 
-                exact={route.exact}
-                path={route.path}
-                component={route.main} 
-              />);
+        return (<Route
+          key={key}
+          exact={route.exact}
+          path={route.path}
+          component={route.main}
+        />);
       })
+    }
+  }
+
+  isAuthenticated = () => {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    
+    if (!token) {
+      document.body.classList.add('login');
+      return <Redirect to="/login" />;
+    } else {
+      document.body.classList.remove('login');
+      console.log('co token tai app');
+      return (
+        <div className="container body">
+        <div className="main_container">
+        { this.props.showAlert ? <Alert /> : null }
+          <SideBar />
+          <TopNav />
+          <Switch>
+            { this.showContent(routes) }
+          </Switch>
+          <Footer />
+        </div>
+      </div>
+      )
     }
   }
 
   render() {
     return (
       <Router>
-        <div className="container body">
-          <div className="main_container">
-            <SideBar />
-            <TopNav />
-            <Switch>
-              { this.showContent(routes) }
-            </Switch>
-            <Footer />
-          </div>
-        </div>
+        { this.isAuthenticated() }
+        <Route path="/login" exact="true" component={Login} />
       </Router>
     );
   }
-
-
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    showAlert: state.alert.showAlert,
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, null)(App);

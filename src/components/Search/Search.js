@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './Search.css';
+import './Search.css';
 import * as actionItem from '../../actions/item';
 import * as actionInvoice from '../../actions/invoice';
 
@@ -27,10 +27,6 @@ class Search extends Component {
                 default:
                     break;
             }
-
-            // this.setState({
-            //     keyword: ''
-            // });
         }
     }
 
@@ -48,16 +44,10 @@ class Search extends Component {
     
     render() {
         return (      
-            <div className="col-sm-3">
-                <input autoComplete="off" value={this.state.keyword} onChange={(e) => this.handleInputChange(e)} onKeyPress={(e) => this.handleKeyPress(e)} name="keyword" type="text" className="form-control search" placeholder="Search" />
+            <div className={this.props.colspan ? this.props.colspan : 'col-sm-3'}>
+                <input autoComplete="off" value={this.state.keyword} onChange={(e) => this.handleInputChange(e)} onKeyPress={(e) => this.handleKeyPress(e)} name="keyword" type="text" className="form-control search" placeholder={this.props.placeholder} />
             </div>
         );
-    }
-}
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        datepicker: state.invoice.datepicker
     }
 }
 

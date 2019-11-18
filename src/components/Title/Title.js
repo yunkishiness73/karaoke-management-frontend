@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import style from './style.css';
+import './style.css';
 
-class Title extends Component {
-    constructor(props) {
-        super(props);
-    }
-    
+class Title extends Component {    
     render() {
         return (
-            <div className={ this.props.colspan + ' ' + 'title'}>
+            <div className={`${this.props.colspan} + ' ' + title`}>
                     { this.props.title }
             </div>
         );

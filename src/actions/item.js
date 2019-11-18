@@ -2,7 +2,9 @@ import {
   FETCH_ITEM_LIST, SAVE_ITEM_SUCCESS,EDIT_ITEM,
    SHOW_ITEM_FORM, HIDE_ITEM_FORM 
 } from '../constants/item';
+import { AlertType, StatusCode } from '../constants/constants';
 import ItemService from '../services/ItemService';
+import * as alert from './alert';
 
 export const fetchItemListSuccess = (items) => {
     return {
@@ -15,8 +17,9 @@ export const fetchItemList = () => {
     return dispatch => {
         return ItemService.getItems()
                           .then(res => {
-                            // console.log(res.err);
-                            dispatch(fetchItemListSuccess(res.data));
+                            if (res.status === StatusCode.SUCCESS) {
+                              dispatch(fetchItemListSuccess(res.data));
+                            }
                           })
                           .catch(err => {
                             console.log("ahihi");
@@ -35,12 +38,12 @@ export const saveItem = (item) => {
   return dispatch => {
     return ItemService.save(item)
                       .then(res => {
-                        console.log(res);
-                        dispatch(saveItemSuccess(item));
-                        // return fetchItemList();
+                        if (res.status === StatusCode.SUCCESS) {
+                          dispatch(saveItemSuccess(item));
+                          dispatch(alert.showAlert(AlertType.SUCCESS, res.data.message))
+                        }
                       })
                       .then(() => {
-                        console.log('then 2');
                         dispatch(fetchItemList());
                       })
                       .catch(err => {
@@ -53,10 +56,11 @@ export const deleteItem = (id) => {
   return dispatch => {
     return ItemService.deleteItemById(id)
                       .then(res => {
-                        console.log(res);
+                        if (res.status === StatusCode.SUCCESS) {
+                          dispatch(alert.showAlert(AlertType.SUCCESS, res.data.message))
+                        }
                       })
                       .then(() => {
-                        console.log('then 2');
                         dispatch(fetchItemList());
                       })
                       .catch(err => {

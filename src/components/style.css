@@ -1,0 +1,7 @@
+.side-bar:hover {
+	background: #536A7F;
+	border: 1px solid #536A7F;
+    color: #fff;
+    transition: all 0.5s;
+    height:45px;
+}

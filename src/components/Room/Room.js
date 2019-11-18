@@ -4,16 +4,23 @@ import Filter from './Filter/Filter';
 import Title from '../Title/Title';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/room';
-
+import _ from 'lodash';
+import RoomService from '../../services/RoomService';
 
 
 class Room extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             rooms: []
         }
+    }
+
+    componentWillMount() {
+        const token = localStorage.getItem('token');
+        
+        if (token) 
+            RoomService.setHeader('Authorization', `Bearer ` + JSON.parse(token));
     }
 
     renderRoomItem = () => {
@@ -23,17 +30,17 @@ class Room extends Component {
         let VIPRoomGroup = [];
 
         if (Array.isArray(rooms) && rooms.length > 0) {
-            rooms.map((item, key) => {
+            _.each(rooms, (item) => {
                 if (item.name.indexOf('N') !== -1)
-                    normalRoomGroup.push(<RoomItem key={item.name} name={item.name} id={item.id} value={item}/>);
+                normalRoomGroup.push(<RoomItem key={item.name} name={item.name} id={item.id} value={item}/>);
 
                 if (item.name.indexOf('L') !== -1)
                     largeRoomGroup.push(<RoomItem key={item.name} name={item.name} id={item.id} value={item}/>);
 
                 if (item.name.indexOf('V') !== -1)
                     VIPRoomGroup.push(<RoomItem key={item.name} name={item.name} id={item.id} value={item}/>);
-            });
-
+            })
+            
             return (
                 <div className='row'>
                     <div className={'row'}>
@@ -57,7 +64,7 @@ class Room extends Component {
         console.log(this.props.match);
         return (
             <div className="card-deck right_col">
-                <div class="row">
+                <div className="row">
                     <Title colspan="col-sm-1" title="Rooms"/>
                     <Filter />
                 </div>

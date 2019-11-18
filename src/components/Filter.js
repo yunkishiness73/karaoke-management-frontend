@@ -31,16 +31,18 @@ class Filter extends Component {
         this.setState({ endDate: date, dateRange });
     }
 
-    onSubmit(e) {
+    onSubmit(e, viewType) {
         e.preventDefault();
+
         let dateRange = [...this.state.dateRange];
         dateRange = _.map(dateRange, (date) => date.format("YYYY-MM-DD"));
 
         const criteria = {
             dateRange: dateRange,
-            viewType: this.state.viewType
+            viewType: viewType
         };
 
+        this.props.getViewType(viewType ? viewType : 'day');
         this.props.fetchSummaryInvoiceList(criteria);
         // console.log('filter ' +this.state.filterType);
         // console.log("from " +this.state.dateRange[0].format("YYYY-MM-DD"));
@@ -54,15 +56,14 @@ class Filter extends Component {
         let value = parseInt(target.value);
         let selectDateRange = false;
 
-        // console.log(name);
-        // console.log(value);
-
         switch (value) {
             case 0:
                 dateRange = [moment(), moment()];
+                this.props.getDateRange(dateRange);
                 break;
             case 1:
                 dateRange = [moment().subtract(1, 'days'), moment().subtract(1, 'days')];
+                this.props.getDateRange(dateRange);
                 break;
             case 2:
                 let currDay = moment().day();
@@ -72,23 +73,27 @@ class Filter extends Component {
                 // console.log(moment().set('date', startDateOfWeek));
                 // console.log('----');
                 dateRange = [moment().set('date', startDateOfWeek), moment()];
+                this.props.getDateRange(dateRange);
                 break;
             case 3:
                 dateRange = [moment().set('date', 1), moment()];
+                this.props.getDateRange(dateRange);
                 break;
             default:
                 selectDateRange = true;
                 dateRange = [moment(this.state.startDate), moment(this.state.endDate)];
+                this.props.getDateRange(dateRange);
                 break;
         }
 
         this.setState({ [name]: value, dateRange, startDate: dateRange[0]._d, endDate: dateRange[1]._d, selectDateRange });
     }
 
+
     renderDatePicker = () => {
         if (this.state.selectDateRange)
             return (
-                <div style={{ display: 'block'}}>
+                <div style={{ display: 'block' }}>
                     <div className="col-sm-2">
                         <DatePicker
                             className="form-control"
@@ -134,7 +139,7 @@ class Filter extends Component {
                                     <option value={4}>Chọn khoảng thời gian</option>
                                 </select>
                             </div>
-                            { this.renderDatePicker() }
+                            {this.renderDatePicker()}
                             <div className="col-sm-2">
                                 <button onClick={(e) => this.onSubmit(e)} className="btn btn-success btn-submit">Xem Báo Cáo</button>
                             </div>
@@ -142,28 +147,17 @@ class Filter extends Component {
                         <hr className="m-y-md" />
                     </div>
                     <div className="row">
-                        <div className>
-                            <div style={{ width: '49%', border: '1px solid #0c020245', float: 'left', marginRight: '1%' }}>
-                                <Canvas />
-                                <div style={{ width: '100%', textAlign: 'center', background: 'white', padding: '5px' }}>
-                                    <div className="btn-group" role="group" style={{ textAlign: 'center', margin: '0 auto' }}>
-                                        <button type="button" className="btn btn-secondary" style={{ background: 'white' }}>Ngày</button>
-                                        <button type="button" className="btn btn-secondary" style={{ background: 'white' }}>Tháng</button>
-                                        <button type="button" className="btn btn-secondary" style={{ background: 'white' }}>Năm</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style={{ width: '49%', border: '1px solid #0c020245', float: 'left', marginLeft: '1%' }}>
-                                <Canvas />
-                                <div className="" style={{ width: '100%', textAlign: 'center', background: 'white', padding: '5px' }}>
-                                    <div className="btn-group" role="group">
-                                        <button type="button" className="btn btn-secondary" style={{ background: 'white' }}>Ngày</button>
-                                        <button type="button" className="btn btn-secondary" style={{ background: 'white' }}>Tháng</button>
-                                        <button type="button" className="btn btn-secondary" style={{ background: 'white' }}>Năm</button>
-                                    </div>
+                        <div style={{ width: '90%', border: '1px solid #0c020245', margin: '15px auto'}}>
+                            <Canvas />
+                            <div style={{ width: '100%', textAlign: 'center', background: 'white', padding: '5px' }}>
+                                <div className="btn-group" role="group" style={{ textAlign: 'center', margin: '0 auto' }}>
+                                    <button onClick={(e) => this.onSubmit(e, 'day')} type="button" className="btn btn-secondary" style={{ background: 'white' }}>Ngày</button>
+                                    <button onClick={(e) => this.onSubmit(e, 'month')} type="button" className="btn btn-secondary" style={{ background: 'white' }}>Tháng</button>
+                                    <button  onClick={(e) => this.onSubmit(e, 'year')} type="button" className="btn btn-secondary" style={{ background: 'white' }}>Năm</button>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -174,7 +168,9 @@ class Filter extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        fetchSummaryInvoiceList: (criteria) => dispatch(actions.fetchSummaryInvoiceList(criteria))
+        fetchSummaryInvoiceList: (criteria) => dispatch(actions.fetchSummaryInvoiceList(criteria)),
+        getDateRange: (dateRange) => dispatch(actions.getDateRange(dateRange)),
+        getViewType: (viewType) => dispatch(actions.getViewType(viewType))
     }
 }
 

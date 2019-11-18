@@ -12,7 +12,7 @@ class LeftCol extends Component {
     }
 
     renderAddButton = () => {
-        if (this.props.isAddItemButtonShow) {
+        if (this.props.isAddItemButtonShow && !this.props.type) {
             return (
                 <div className="col-sm-3" style={{height: '40px', float: 'right'}}>
                     <button onClick={() => this.handleClick()} className="btn btn-success" style={{height: '40px'}}>
@@ -25,17 +25,22 @@ class LeftCol extends Component {
 
     render() {
         return (
-            <div className="col-sm-7">
+            <div className="col-sm-6">
                 <div className="row">
                     <Title colspan="col-sm-2" title="Items" />
-                    <Search type="ITEM" />
+                    <Search type="ITEM" colspan="col-sm-5" placeholder="Nhập tên sản phẩm, giá, từ khóa..."/>
                     { this.renderAddButton() }
                 </div>
                 <hr />
-                <table className="table">
-                    <THead />
-                    <TBody />
-                </table>
+                <div className="row panel panel-primary">
+                    <div className="panel-heading" style={{ fontSize: '18px', background: '#2a3f54' }}>Items List</div>
+                    <div className="panel-body" style={{ overflowY: 'scroll', maxHeight: '800px'}}>
+                        <table className="table table-bordered table-hover table-striped" style={{ fontSize: '15px' }}>
+                            <THead />
+                            <TBody type={this.props.type}/>
+                        </table>
+                    </div>
+                </div>
             </div>  
         );
     }

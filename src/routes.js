@@ -2,6 +2,7 @@ import Room from './components/Room/Room';
 import Item from './components/Item/Item';
 import Invoice from './components/Invoice/Invoice';
 import Filter from './components/Filter';
+import Payment from './components/Payment/Payment';
 
 const routes = [
     {
@@ -11,7 +12,7 @@ const routes = [
     },
     {
         path: '/items',
-        exact: false,
+        exact: true,
         main: Item
     },
     {
@@ -21,8 +22,13 @@ const routes = [
     },
     {
         path: '/invoices/summarize',
-        exact: false,
+        exact: true,
         main: Filter
+    },
+    {
+        path: '/payment/:id',
+        exact: true,
+        main: Payment
     }
 ]
 

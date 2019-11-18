@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as actions from '../../../actions/item';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import NumberFormat from 'react-number-format';
 
 class TBody extends Component {
 
@@ -39,6 +40,7 @@ class TBody extends Component {
     }
 
     handleSubmit = () => {
+        console.log(this.props.editItem);
         if (this.props.editItem && this.props.editItem.id) {
             this.props.saveItem(this.props.editItem);
             return this.props.hideItemForm();
@@ -71,7 +73,23 @@ class TBody extends Component {
                 <div className="form-group">
                     <label htmlFor="price" className="col-sm-3 control-label">Giá tiền</label>
                     <div className="col-sm-9">
-                        <input value={this.props.editItem ? this.props.editItem.price : this.state.item.price} name="price" onChange={(e) => this.handleInputChange(e)} type="text" id="price" className="form-control" placeholder="Giá tiền sản phẩm *" />
+                    <NumberFormat className="form-control" placeholder="Giá tiền sản phẩm *" value={this.props.editItem ? this.props.editItem.price : this.state.item.price} thousandSeparator={true} suffix={'₫'} onValueChange={(values) => {
+                        const {value} = values;
+                        // formattedValue = $2,223
+                        // value ie, 2223
+                        let item = {};
+
+                        if (!_.isEmpty(this.props.editItem)) {
+                            item = this.props.editItem;
+                        } else {
+                            item = this.state.item;
+                        }
+                
+                        item['price'] = value;
+                
+                        this.setState({ item });
+                    }}/>
+                        {/* <input value={this.props.editItem ? this.props.editItem.price : this.state.item.price} name="price" onChange={(e) => this.handleInputChange(e)} type="text" id="price" className="form-control" placeholder="Giá tiền sản phẩm *" /> */}
                     </div>
                 </div>
                 <div className="form-group">
@@ -82,7 +100,7 @@ class TBody extends Component {
                                 <i className="fa fa-plus-square"> Add Item  </i>
                             </button>
                         </div>
-                        <div className="col-sm-3" style={{ marginLeft: '-35px'}}>
+                        <div className="col-sm-2" style={{ marginLeft: '-40px'}}>
                             <button value="reset" onClick={() => this.handleCancel()} type="reset" style={{height: '40px', color: '#D9534F'}} className="btn" >Cancel</button>
                         </div>
                         <div className="col-sm-2" ></div>

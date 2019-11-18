@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/room';
+import { Link } from 'react-router-dom';
 
 class RoomItem extends Component {
 
+    book = (e) => {
+        const id = this.props.id;
+        
+        if (id) 
+            this.props.checkIn(id);
+    }
+
     renderButton = () => {
         if (this.props.value.isBooking) 
-            return <a href="#" className="btn btn-success">Chi tiết</a>;
+            return <Link to={`payment/${this.props.id}`} className="btn btn-success">Chi tiết </Link>;
            
-        return <a href="#" className="btn btn-primary checkIn">Đặt Phòng</a>;
+        return <button onClick={(e) => this.book(e)} className="btn btn-primary checkIn">Đặt Phòng</button>;
     }
 
     render() {
@@ -36,4 +46,10 @@ class RoomItem extends Component {
     }
 }
 
-export default RoomItem;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        checkIn: (id) => dispatch(actions.checkIn(id))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(RoomItem);

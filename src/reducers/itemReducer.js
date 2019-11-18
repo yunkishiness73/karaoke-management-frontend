@@ -1,4 +1,4 @@
-import { FETCH_ITEM_LIST, EDIT_ITEM, SHOW_ITEM_FORM, HIDE_ITEM_FORM, SHOW_ADD_ITEM_BUTTON } from '../constants/item';
+import { FETCH_ITEM_LIST, EDIT_ITEM, SHOW_ITEM_FORM, HIDE_ITEM_FORM } from '../constants/item';
 
 const initialState = {
     showItemForm: false,

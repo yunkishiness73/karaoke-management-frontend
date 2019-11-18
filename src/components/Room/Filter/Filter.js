@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './style.css';
+import './style.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions/room';
 
@@ -29,11 +29,6 @@ class Filter extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        prop: state.prop
-    }
-}
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
@@ -43,4 +38,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connect(null, mapDispatchToProps)(Filter)

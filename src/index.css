@@ -12,10 +12,6 @@ code {
     monospace;
 } */
 
-.nav-md .container.body .right_col {
-  height: 1000px !important;
-}
-
 .react-datepicker {
   font-size: 1.3rem !important;
 }

@@ -5,7 +5,7 @@ class THead extends Component {
         return (
             <thead>
                 <tr style={{ textAlign: 'center ' }}>
-                    <th>STT</th>
+                    <th style={{ textDecoration: 'underline'}}>#</th>
                     <th>Ngày</th>
                     <th>Thu ngân</th>
                     <th>Hóa đơn</th>
