@@ -5,7 +5,8 @@ import {
     FETCH_SUMMARY_INVOICE_LIST,
     GET_DATE_RANGE,
     GET_VIEW_TYPE,
-    FETCH_INVOICE_ITEM_SUCCESS
+    FETCH_INVOICE_ITEM_SUCCESS,
+    SET_CHARGE
 } from '../constants/invoice';
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
     keyword: '',
     datepicker: '',
     statistics: [],
-    dateRange: []
+    dateRange: [],
+    charge: 0
 }
 
 const fetchInvoiceList = (state, action) => {
@@ -65,6 +67,13 @@ const fetchInvoiceItemSuccess = (state, action) => {
     }
 }
 
+const setCharge = (state, action) => {
+    return {
+        ...state,
+        charge: action.charge
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_INVOICE_LIST:
@@ -81,6 +90,8 @@ const reducer = (state = initialState, action) => {
             return getViewType(state, action);
         case FETCH_INVOICE_ITEM_SUCCESS:
             return fetchInvoiceItemSuccess(state, action);
+        case SET_CHARGE:
+            return setCharge(state, action);
         default:
             return state;
     }

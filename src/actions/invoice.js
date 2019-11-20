@@ -7,12 +7,13 @@ import {
     FETCH_SUMMARY_INVOICE_LIST_FAIL,
     GET_DATE_RANGE,
     GET_VIEW_TYPE,
-    FETCH_INVOICE_ITEM_SUCCESS
+    FETCH_INVOICE_ITEM_SUCCESS,
+    SET_CHARGE
   } from '../constants/invoice';
 import InvoiceService from '../services/InvoiceService';
 import DetailInvoiceService from '../services/DetailInvoiceService';
 import * as alert from './alert';
-import { StatusCode } from '../constants/constants';
+import { StatusCode, BILL_URL } from '../constants/constants';
 
 export const fetchInvoiceListSuccess = (invoices) => {
     return {
@@ -166,5 +167,32 @@ export const deleteDetailInvoice = (id) => {
     }
 }
 
+export const issueAnInvoice = (id) => {
+    return (dispatch, getState) => {
+        const { invoice } = getState();
+        const charge = invoice.charge;
+
+        return InvoiceService.issueAnInvoice(id, charge)
+                             .then(res => {
+                                if (StatusCode.SUCCESS === res.status) {
+                                    console.log(res.data.data);
+                                    setTimeout(() => {
+                                        window.open(`${BILL_URL}${res.data.data.invoicePdf}`, '_blank');
+                                        document.location = '/';
+                                    }, 1000)
+                                }
+                             })
+                             .catch(err => {
+
+                             })
+    }
+}
+
+export const setCharge = (charge) => {
+    return {
+        type: SET_CHARGE,
+        charge
+    }
+}
 
 

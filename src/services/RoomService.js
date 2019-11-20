@@ -34,6 +34,20 @@ class RoomService extends BaseService {
         
         return this.get(endpoint);
     }
+
+    checkOut(id, surCharge) {
+        let endpoint = '';
+
+        if (!id)
+            return null;
+        
+        if (surCharge)
+            endpoint = `${this.requestURL}/checkOut/${id}?&surCharge=${surCharge}`;
+        else
+            endpoint = `${this.requestURL}/checkOut/${id}`;
+        
+        return this.get(endpoint);
+    }
     
 }
 

@@ -5,7 +5,6 @@ import RoomService from '../../services/RoomService';
 import InvoiceService from '../../services/InvoiceService';
 import DetailInvoiceService from '../../services/DetailInvoiceService';
 import PaymentBoard from './PaymentBoard';
-import Title from '../Title/Title';
 import OrderList from './OrderList';
 import * as actions from '../../actions/invoice';
 import { connect } from 'react-redux';

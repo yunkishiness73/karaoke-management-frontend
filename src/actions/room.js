@@ -1,7 +1,8 @@
-import { FETCH_ROOM_LIST, FETCH_ROOM_BY_ID_SUCCESS } from '../constants/room';
+import { FETCH_ROOM_LIST, FETCH_ROOM_BY_ID_SUCCESS, SET_SURCHARGE } from '../constants/room';
 import { AlertType, StatusCode } from '../constants/constants';
 import RoomService from '../services/RoomService';
 import * as alert from './alert';
+import * as invoice from './invoice';
 
 export const fetchRoomListSuccess = (rooms) => {
     return {
@@ -74,8 +75,34 @@ export const checkIn = (id) => {
     }
 }
 
+export const checkOut = (id) => {
+    return (dispatch, getState) => {
+        const { room } = getState();
+        const surCharge = room.surCharge;
+        return RoomService.checkOut(id, surCharge)
+                          .then(res => {
+                            if (res.status === StatusCode.SUCCESS) {
+                                console.log(res.data);
+                                dispatch(invoice.fetchInvoiceItemSuccess(res.data.data));
+                            }
+                          })
+                          .catch(err => {
+
+                          })
+    }
+}
+
+
+
 export const showPayment = () => {
     return {
         type: 'SHOW_MENU'
+    }
+}
+
+export const setSurCharge = (surCharge) => {
+    return {
+        type: 'SET_SURCHARGE',
+        surCharge
     }
 }

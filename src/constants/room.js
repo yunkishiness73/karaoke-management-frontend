@@ -10,4 +10,6 @@ export const BOOK_FAIL = 'CHECKIN_FAIL';
 
 export const FETCH_ROOM_BY_ID_SUCCESS = 'FETCH_ROOM_BY_ID_SUCCESS';
 
+export const SET_SURCHARGE = 'SET_SURCHARGE';
+
 

@@ -58,6 +58,18 @@ class InvoiceService extends BaseService {
         
         return this.get(endpoint);
     }
+
+    issueAnInvoice(invoiceId, charge) {
+        let endpoint = `${this.requestURL}/issueInvoice?`;
+
+        if (invoiceId)
+            endpoint += `invoiceId=${invoiceId}`;
+        
+        if (charge)
+            endpoint += `&charge=${charge}`;
+
+        return this.get(endpoint);
+    }
     
 }
 

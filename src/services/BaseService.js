@@ -10,7 +10,6 @@ class BaseService {
     }
 
     setHeader(key, value) {
-        console.log('set');
         this.service.defaults.headers.common[key] = value;
     }
 
