@@ -19,13 +19,25 @@ export const authSuccess = (token) => {
 
 export const auth = (username, password) => {
     return dispatch => {
+        let token = '';
         return AuthService.authenticate(username, password)
                           .then(res => {
                             if (res.status === StatusCode.SUCCESS) {
-                                let token = res.data.token;
+                                token = res.data.token;
 
                                 RoomService.setHeader('Authorization', `Bearer ` + token);
+                                AuthService.setHeader('Authorization', `Bearer ` + token);
+                               
+                                return AuthService.getCurrentUser();
+                            }
+                          })
+                          .then(response => {
+                            if (response.status === StatusCode.SUCCESS) {
+                                const { firstName, lastName } = response.data;
+                                console.log(token);
+                                localStorage.setItem('displayName', JSON.stringify(`${firstName} ${lastName}`));
                                 dispatch(authSuccess(token));
+                                
                             }
                           })
                           .catch(err => {

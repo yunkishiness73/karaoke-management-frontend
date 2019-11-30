@@ -29,7 +29,6 @@ class Payment extends Component {
             DetailInvoiceService.setHeader('Authorization', `Bearer ` + JSON.parse(token));
 
             const id = this.props.match.params.id;
-            console.log("roomid" +id);
             this.props.fetchInvoiceItem(id);
         }
     }

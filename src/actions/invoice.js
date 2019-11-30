@@ -179,7 +179,7 @@ export const issueAnInvoice = (id) => {
                                     setTimeout(() => {
                                         window.open(`${BILL_URL}${res.data.data.invoicePdf}`, '_blank');
                                         document.location = '/';
-                                    }, 1000)
+                                    }, 2000)
                                 }
                              })
                              .catch(err => {

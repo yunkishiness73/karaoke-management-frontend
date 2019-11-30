@@ -15,16 +15,23 @@ export const fetchItemListSuccess = (items) => {
 
 export const fetchItemList = () => {
     return dispatch => {
+      try {
         return ItemService.getItems()
                           .then(res => {
+                            console.log(res.status);
                             if (res.status === StatusCode.SUCCESS) {
                               dispatch(fetchItemListSuccess(res.data));
                             }
                           })
                           .catch(err => {
-                            console.log("ahihi");
-                            console.log(err);
+                            // console.log("ahihi");
+                            dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
+                            //console.log(err.data.message);
                           })
+      } catch(error) {
+        console.log(error);
+      }
+        
     }
 }
 
@@ -40,7 +47,7 @@ export const saveItem = (item) => {
                       .then(res => {
                         if (res.status === StatusCode.SUCCESS) {
                           dispatch(saveItemSuccess(item));
-                          dispatch(alert.showAlert(AlertType.SUCCESS, res.data.message))
+                          dispatch(alert.showAlert(AlertType.SUCCESS, res.data.message));
                         }
                       })
                       .then(() => {
@@ -64,7 +71,7 @@ export const deleteItem = (id) => {
                         dispatch(fetchItemList());
                       })
                       .catch(err => {
-                        console.log(err);
+                        dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                       })
   }
 }

@@ -31,9 +31,11 @@ class BaseService {
                 // this.removeHeader('token');
                 // localStorage.removeItem('token');
                 // this.redirectTo(document, '/login');
-                break;
+                // console.log(error);
+                return Promise.reject(error.response);
+                // break;
             default:
-                return Promise.reject(error);
+                return Promise.reject(error.response);
         }
     }
 

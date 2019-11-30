@@ -20,7 +20,7 @@ class TopNav extends Component {
                         <ul className="nav navbar-nav navbar-right">
                             <li>
                                 <Link to="/login" className="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="" />Nguyễn Kiệt
+                                    <img src="images/img.jpg" alt="" /> { JSON.parse(localStorage.getItem('displayName')) }
             <span className=" fa fa-angle-down" />
                                 </Link>
                                 <ul className="dropdown-menu dropdown-usermenu pull-right">

@@ -13,6 +13,12 @@ class AuthService extends BaseService {
 
         return this.post(this.requestURL, payload);
     }
+
+    getCurrentUser() {
+        const endpoint = `${this.baseURL}/users/me`;
+
+        return this.get(endpoint);
+    }
 }
 
 export default new AuthService();

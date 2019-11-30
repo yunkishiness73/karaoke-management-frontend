@@ -11,7 +11,7 @@ class TBody extends Component {
 
         if (orderedList && orderedList.length > 0) {
             const orderedListSorted = orderedList.sort(function(a,b){
-                // console.log(a,b);
+                console.log(a,b);
                 return new Date(a.createdDate) - new Date(b.createdDate);
               });
 
