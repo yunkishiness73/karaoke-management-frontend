@@ -23,7 +23,7 @@ class Login extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-    
+        console.log('submit');
         const username = this.state.auth.username;
         const password = this.state.auth.password;
 
@@ -68,7 +68,9 @@ class Login extends Component {
         if (this.props.isAuthenticated || token) {
             console.log('co token tai login');
             authRedirect = <Redirect to="/" />
-        } 
+        } else {
+
+        }
         
         return (
             <div>
@@ -97,7 +99,7 @@ class Login extends Component {
                                     <div>
                                         <h1><i className="fa fa-paw" /> Karaoke Vui Vẻ!</h1>
                                         <p>©2019 Đồ án Chuyên Đề Công Nghệ Phần Mềm</p>
-                                        <p>Nguyễn Kiệt - Nguyễn Tuấn</p>
+                                        <p>Nguyễn Kiệt</p>
                                     </div>
                                 </div>
                             </form>

@@ -23,6 +23,15 @@ class Room extends Component {
             RoomService.setHeader('Authorization', `Bearer ` + JSON.parse(token));
     }
 
+    // renderRoomGroup(roomGroup) {
+    //     if (roomGroup.length)
+    //         return (
+    //             <div className={'row'}>
+    //                 { normalRoomGroup }
+    //             </div>
+    //         );
+    // }
+
     renderRoomItem = () => {
         let rooms = this.props.roomData.rooms;
         let normalRoomGroup = [];
@@ -46,11 +55,11 @@ class Room extends Component {
                     <div className={'row'}>
                         { normalRoomGroup }
                     </div>
-                    <hr />
+                    { normalRoomGroup.length ? <hr /> : ''}
                     <div className={'row'}>
                         { largeRoomGroup }
                     </div>
-                    <hr />
+                    { largeRoomGroup.length ? <hr /> : ''}
                     <div className={'row'}>
                         { VIPRoomGroup }
                     </div>

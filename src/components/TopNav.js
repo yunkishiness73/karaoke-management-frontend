@@ -9,6 +9,8 @@ class TopNav extends Component {
         e.preventDefault();
 
         localStorage.removeItem('token');
+        localStorage.removeItem('displayName');
+
         document.location = '/login';
     }
 

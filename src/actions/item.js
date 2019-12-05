@@ -24,9 +24,7 @@ export const fetchItemList = () => {
                             }
                           })
                           .catch(err => {
-                            // console.log("ahihi");
                             dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
-                            //console.log(err.data.message);
                           })
       } catch(error) {
         console.log(error);

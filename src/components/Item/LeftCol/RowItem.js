@@ -3,6 +3,7 @@ import * as actions from '../../../actions/item';
 import * as invoiceActions from '../../../actions/invoice';
 import { connect } from 'react-redux';
 import NumberFormat from 'react-number-format';
+import { Link } from 'react-router-dom';
 
 class RowItem extends Component {
 
@@ -42,8 +43,8 @@ class RowItem extends Component {
                     <td style={{ width: '20%' }}>
                         <a onClick={(e) => this.handleEdit(e)} href="/" className="btn btn-warning btn-edit" style={{ display: 'inline-block', height: '34px' }}><i
                             className="fa fa-pencil"></i></a>
-                        <a onClick={(e) => { if (window.confirm('Are you sure you want to delete this item ?')) this.handleRemove(e) }} href="/" className="btn btn-danger btn-remove" style={{ display: 'inline-block', height: '34px' }}><i
-                            className="fa fa-remove"></i></a>
+                        <Link onClick={(e) => { if (window.confirm('Are you sure you want to delete this item ?')) this.handleRemove(e) }} to="/items" className="btn btn-danger btn-remove" style={{ display: 'inline-block', height: '34px' }}><i
+                            className="fa fa-remove"></i></Link>
                     </td>
                 );
 
