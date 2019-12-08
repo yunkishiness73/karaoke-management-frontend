@@ -43,7 +43,7 @@ class Fieldset extends Component {
                         this.props.setSurCharge(value);
                         break;
                     case 'charge':
-                        const chargePattern = /^\d+$/;
+                        const chargePattern = /^[1-9][0-9]*$/;
                         let message = 'Số tiền khách đưa không hợp lệ. Vui lòng kiểm tra lại!';
                         let flag = 1;
 
@@ -53,15 +53,14 @@ class Fieldset extends Component {
                         if(parseInt(value) < this.props.totalPrice)
                             flag = 0;
                         
-                        // if(!flag) {
-                        //     alert(message);
-
-                        //     return;
-                        // }
+                        if(!flag) {
+                            this.props.setIssueInvoice(false);
+                        } else {
+                            this.setState({ [this.props.name]: value });
+                            this.props.setCharge(value);
+                            this.props.setIssueInvoice(true);
+                        }
                         
-                        this.setState({ [this.props.name]: value });
-                        this.props.setCharge(value);
-
                         break;
                 }             
                 
@@ -86,7 +85,8 @@ class Fieldset extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         setSurCharge: (surCharge) => dispatch(actions.setSurCharge(surCharge)),
-        setCharge: (charge) => dispatch(invoiceActions.setCharge(charge))
+        setCharge: (charge) => dispatch(invoiceActions.setCharge(charge)),
+        setIssueInvoice: (formIsValid) => dispatch(invoiceActions.setIssueInvoice(formIsValid))
     }
 }
 

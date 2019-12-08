@@ -28,12 +28,11 @@ class BaseService {
     onError = error => {
         switch (error.response.status) {
             case 401:
-                // this.removeHeader('token');
-                // localStorage.removeItem('token');
-                // this.redirectTo(document, '/login');
-                // console.log(error);
-                return Promise.reject(error.response);
-                // break;
+                this.removeHeader('token');
+                localStorage.removeItem('token');
+                localStorage.removeItem('displayName');
+                this.redirectTo(document, '/login');
+                return Promise.reject(error.response)
             default:
                 return Promise.reject(error.response);
         }

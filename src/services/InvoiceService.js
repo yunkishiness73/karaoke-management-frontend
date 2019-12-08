@@ -52,7 +52,7 @@ class InvoiceService extends BaseService {
         const { viewType, dateRange } = criteria;
         let endpoint = `${this.requestURL}/summarize`;
        
-        if (dateRange && dateRange.length === 2) 
+        if (dateRange && dateRange.length === 2 && dateRange[0] && dateRange[1]) 
             endpoint = (viewType ?  `${this.requestURL}/summarize?viewType=${viewType}&from=${dateRange[0]}&to=${dateRange[1]}`
                         : `${this.requestURL}/summarize?from=${dateRange[0]}&to=${dateRange[1]}`);
         

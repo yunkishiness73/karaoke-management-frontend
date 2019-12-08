@@ -9,7 +9,7 @@ import './style.css';
 class RightCol extends Component {
     render() {
         return (
-            <div className="col-sm-5" style={{ position: 'fixed', top: '60px', right: '0', width: '35%' }}>
+            <div className="col-sm-6" style={{ position: 'fixed', top: '60px', right: '0', width: '40%' }}>
                 <div class="row">
                     <Title colspan="col-sm-5" title="Add New Item" />
                 </div>

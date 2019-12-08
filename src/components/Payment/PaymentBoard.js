@@ -52,7 +52,7 @@ class PaymentBoard extends Component {
         if (this.state.isCheckOut)
             return (
                 <div className="col-sm-6">
-                    <button onClick={(e) => this.issueAnInvoice(e)} className="check btn btn-success" style={{ width: '100%', display: 'inline-block' }}>In Hóa Đơn</button>
+                    <button disabled={ !this.props.formIsValid ? 'disabled' : ''} onClick={(e) => this.issueAnInvoice(e)} className="check btn btn-success" style={{ width: '100%', display: 'inline-block' }}>In Hóa Đơn</button>
                 </div>
             );
     }
@@ -87,7 +87,7 @@ class PaymentBoard extends Component {
                     <Fieldset value={this.props.invoiceItem ? this.props.invoiceItem.roomFee : 0} name="roomFee" disabled="true" type="currency" label="Tiền Giờ" />
                     <Fieldset value={this.props.invoiceItem ? this.props.invoiceItem.surcharge : 0} name="surCharge" type="currency" label="Phụ Thu" />
                     <Fieldset type="currency" value={this.props.invoiceItem ? this.props.invoiceItem['totalPrice'] : 0} name="totalPrice" disabled="true" label="Tổng Tiền" />
-                    <Fieldset totalPrice={this.props.invoiceItem ? this.props.invoiceItem['totalPrice'] : 0} name="charge" type="currency" label="Tiền Khách Đưa" />
+                    <Fieldset value={this.props.charge ? this.props.charge : 0} totalPrice={this.props.invoiceItem ? this.props.invoiceItem['totalPrice'] : 0} name="charge" type="currency" label="Tiền Khách Đưa" />
                     <fieldset>
                         <div className="row" style={{ textAlign: 'center' }}>
                             <div className="col-sm-6">
@@ -105,7 +105,8 @@ class PaymentBoard extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        charge: state.invoice.charge
+        charge: state.invoice.charge,
+        formIsValid: state.invoice.formIsValid
     }
 }
 

@@ -8,12 +8,13 @@ import {
     GET_DATE_RANGE,
     GET_VIEW_TYPE,
     FETCH_INVOICE_ITEM_SUCCESS,
-    SET_CHARGE
+    SET_CHARGE,
+    SET_ISSUE_INVOICE
   } from '../constants/invoice';
 import InvoiceService from '../services/InvoiceService';
 import DetailInvoiceService from '../services/DetailInvoiceService';
 import * as alert from './alert';
-import { StatusCode, BILL_URL } from '../constants/constants';
+import { StatusCode, BILL_URL, AlertType } from '../constants/constants';
 
 export const fetchInvoiceListSuccess = (invoices) => {
     return {
@@ -37,7 +38,7 @@ export const fetchInvoiceItem = (roomId) => {
                                     dispatch(fetchInvoiceItemSuccess(res.data));
                              })
                              .catch(err => {
-
+                                dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                              })
     }
 }
@@ -57,7 +58,7 @@ export const fetchInvoiceList = () => {
                                 }
                             })
                             .catch(err => {
-                                console.log(err);
+                                dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                             })
     }
 }
@@ -91,7 +92,7 @@ export const fetchSummaryInvoiceList = (criteria) => {
                                     dispatch(fetchSummaryInvoiceListSuccess(res.data));
                              })
                              .catch(err => {
-
+                                dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                              })
     }
 }
@@ -107,7 +108,7 @@ export const fetchWithViewType = (viewType) => {
                                     dispatch(fetchSummaryInvoiceListSuccess(res.data));
                             })
                             .catch(err => {
-
+                                dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                             })
     }
 }
@@ -151,6 +152,9 @@ export const saveDetailInvoice = (detailInvoice) => {
                                         if (StatusCode.SUCCESS === res.status)
                                            dispatch(fetchInvoiceItem(room.id));
                                     })
+                                    .catch(err => {
+                                        dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
+                                    })
     }
 }
 
@@ -175,15 +179,16 @@ export const issueAnInvoice = (id) => {
         return InvoiceService.issueAnInvoice(id, charge)
                              .then(res => {
                                 if (StatusCode.SUCCESS === res.status) {
-                                    console.log(res.data.data);
                                     setTimeout(() => {
                                         window.open(`${BILL_URL}${res.data.data.invoicePdf}`, '_blank');
-                                        document.location = '/';
-                                    }, 2000)
+                                    }, 1500);
+                                    setTimeout(() => {
+                                        document.location = 'http://localhost:3000/';
+                                    }, 3000);
                                 }
                              })
                              .catch(err => {
-
+                                dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                              })
     }
 }
@@ -192,6 +197,13 @@ export const setCharge = (charge) => {
     return {
         type: SET_CHARGE,
         charge
+    }
+}
+
+export const setIssueInvoice = (formIsValid) => {
+    return {
+        type: SET_ISSUE_INVOICE,
+        formIsValid
     }
 }
 

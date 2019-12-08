@@ -21,21 +21,33 @@ class Filter extends Component {
 
     setStartDate = date => {
         let dateRange = this.state.dateRange;
-        dateRange[0] = moment(date);
-        this.setState({ startDate: date, dateRange });
+
+        if (date) {
+            dateRange[0] = moment(date);
+            this.setState({ startDate: date, dateRange });
+        } else {
+            dateRange[0] = '';
+        }
     }
 
     setEndDate = date => {
         let dateRange = this.state.dateRange;
-        dateRange[1] = moment(date);
-        this.setState({ endDate: date, dateRange });
+
+        if (date) {
+            dateRange[1] = moment(date);
+            this.setState({ endDate: date, dateRange });
+        } else {
+            dateRange[1] = '';
+        }
+       
     }
 
     onSubmit(e, viewType) {
         e.preventDefault();
 
         let dateRange = [...this.state.dateRange];
-        dateRange = _.map(dateRange, (date) => date.format("YYYY-MM-DD"));
+        if (dateRange[0] && dateRange[1])
+            dateRange = _.map(dateRange, (date) => date.format("YYYY-MM-DD"));
 
         const criteria = {
             dateRange: dateRange,
