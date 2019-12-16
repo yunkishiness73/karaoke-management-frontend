@@ -44,7 +44,6 @@ class Fieldset extends Component {
                         break;
                     case 'charge':
                         const chargePattern = /^[1-9][0-9]*$/;
-                        let message = 'Số tiền khách đưa không hợp lệ. Vui lòng kiểm tra lại!';
                         let flag = 1;
 
                         if (!chargePattern.test(value))
@@ -71,8 +70,6 @@ class Fieldset extends Component {
     }
 
     render() {
-        console.log('render fieldset');
-        console.log(this.state);
         return (
             <fieldset className="form-group">
                 <label>{this.props.label}</label>

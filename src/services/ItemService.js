@@ -6,14 +6,12 @@ class ItemService extends BaseService {
         super(props);
         this.baseURL = AppConstant.API_URL;
         this.requestURL = this.baseURL + '/items';
-        console.log('chay vao constructor');
     }
 
     getItems(keyword) {
         let endpoint = '';
 
         if (keyword) {
-            console.log('keyword');
             endpoint = `${this.requestURL}?keyword=${keyword}`;
             return this.get(endpoint);
         }

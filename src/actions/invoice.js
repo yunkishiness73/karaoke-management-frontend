@@ -141,12 +141,7 @@ export const saveDetailInvoice = (detailInvoice) => {
             invoiceInclude.id = invoiceItem.id;
             payload = { ...detailInvoice, invoice: invoiceInclude, quantity: 1 } 
         }
-           
-        console.log('state');
-        console.log(invoiceItem);
-        console.log('payload');
-        console.log(payload);
-
+        
         return DetailInvoiceService.save(payload)
                                     .then(res => {
                                         if (StatusCode.SUCCESS === res.status)

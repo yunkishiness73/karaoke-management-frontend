@@ -17,7 +17,6 @@ class SideBar extends Component {
     }
 
     render() {
-        console.log('render sidebar');
         return (
             <div className="col-md-3 left_col">
                 <div className="left_col scroll-view">

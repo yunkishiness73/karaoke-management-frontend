@@ -64,9 +64,7 @@ class PaymentBoard extends Component {
         const totalPrice = parseInt(this.props.invoiceItem.totalPrice);
         const surCharge = parseInt(this.props.invoiceItem.surcharge);
         const roomFee = totalPrice - surCharge - serviceCharge;
-
-        console.log('room fee' + roomFee);
-
+        
         if (roomFee < 0) return 0;
 
         return roomFee;
@@ -84,8 +82,8 @@ class PaymentBoard extends Component {
                     <Fieldset name="roomType" disabled="true" value={this.props.invoiceItem ? this.props.invoiceItem.room.roomType['type'] : ''} label="Loại Phòng" />
                     <Fieldset disabled="true" value={this.props.invoiceItem ? moment(this.props.invoiceItem['checkIn']).format('DD/MM/YYYY hh:mm') : ''} label="Giờ Đặt" />
                     <Fieldset name="serviceCharge" type="currency" disabled="true" value={this.calServiceCharge()} label="Tiền Dịch Vụ" />
-                    <Fieldset value={this.props.invoiceItem ? this.props.invoiceItem.roomFee : 0} name="roomFee" disabled="true" type="currency" label="Tiền Giờ" />
-                    <Fieldset value={this.props.invoiceItem ? this.props.invoiceItem.surcharge : 0} name="surCharge" type="currency" label="Phụ Thu" />
+                    <Fieldset value={this.props.invoiceItem && this.props.invoiceItem.roomFee ? this.props.invoiceItem.roomFee : 0} name="roomFee" disabled="true" type="currency" label="Tiền Giờ" />
+                    <Fieldset value={this.props.invoiceItem && this.props.invoiceItem.surcharge ? this.props.invoiceItem.surcharge : 0} name="surCharge" type="currency" label="Phụ Thu" />
                     <Fieldset type="currency" value={this.props.invoiceItem ? this.props.invoiceItem['totalPrice'] : 0} name="totalPrice" disabled="true" label="Tổng Tiền" />
                     <Fieldset value={this.props.charge ? this.props.charge : 0} totalPrice={this.props.invoiceItem ? this.props.invoiceItem['totalPrice'] : 0} name="charge" type="currency" label="Tiền Khách Đưa" />
                     <fieldset>

@@ -19,7 +19,6 @@ class RowItem extends Component {
     }
 
     handleOrder = () => {
-        console.log('item');
         let item = this.props.value;
         let payload = { item: {} };
         

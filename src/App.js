@@ -35,14 +35,12 @@ class App extends Component {
 
   isAuthenticated = () => {
     const token = localStorage.getItem('token');
-    console.log(token);
-    
+
     if (!token) {
       document.body.classList.add('login');
       return <Redirect to="/login" />;
     } else {
       document.body.classList.remove('login');
-      console.log('co token tai app');
       return (
         <div className="container body">
         <div className="main_container">

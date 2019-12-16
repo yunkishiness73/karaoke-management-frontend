@@ -34,14 +34,13 @@ export const auth = (username, password) => {
                           .then(response => {
                             if (response.status === StatusCode.SUCCESS) {
                                 const { firstName, lastName } = response.data;
-                                console.log(token);
                                 localStorage.setItem('displayName', JSON.stringify(`${firstName} ${lastName}`));
                                 dispatch(authSuccess(token));
                                 
                             }
                           })
                           .catch(err => {
-
+                            dispatch(alert.showAlert(AlertType.FAIL, 'Username or Password is in correct. Please check again !'));
                           })
     }
 }

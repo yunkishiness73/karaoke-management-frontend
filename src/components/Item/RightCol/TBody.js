@@ -88,7 +88,6 @@ class TBody extends Component {
             return this.props.hideItemForm();
         } else if (this.state.formIsValid) {
             this.props.saveItem(this.state.item);
-
             return this.props.hideItemForm();
         }
         
@@ -99,11 +98,13 @@ class TBody extends Component {
 
     handleCancel = () => {
         this.props.hideItemForm();
+        this.props.fetchItemList();
     }
 
     render() {
         console.log('render');
         console.log(this.state.formIsValid, _.isEmpty(this.props.editItem));
+        console.log(this.props.editItem);
         return (
             <form id="form" className="form-horizontal">
                 <div className="form-group">

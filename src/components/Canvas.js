@@ -39,8 +39,7 @@ class Canvas extends Component {
                     label: moment(item.period).format(formatDate),
                     y: item.totalPrice,
                     z: item.quantity,
-                })
-                console.log(dataPoints[0]);
+                });
             })
         }
 
@@ -67,7 +66,6 @@ class Canvas extends Component {
 
     render() {
         const dateFormat = this.getDateFormat();
-        console.log(dateFormat);
         const dataPoints = this.processStatisticsBeforeRender(dateFormat);
         const options = this.configOptions(dataPoints);
 

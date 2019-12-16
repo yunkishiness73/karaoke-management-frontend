@@ -34,8 +34,6 @@ class Search extends Component {
         let target = e.target;
         let value = target.value;
         let key = target.name;
-
-        console.log(value);
         
         this.setState({
             [key]: value

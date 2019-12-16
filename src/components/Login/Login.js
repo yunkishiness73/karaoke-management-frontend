@@ -23,7 +23,7 @@ class Login extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log('submit');
+
         const username = this.state.auth.username;
         const password = this.state.auth.password;
 
@@ -66,10 +66,7 @@ class Login extends Component {
         let authRedirect = null;
 
         if (this.props.isAuthenticated || token) {
-            console.log('co token tai login');
             authRedirect = <Redirect to="/" />
-        } else {
-
         }
         
         return (
@@ -78,6 +75,7 @@ class Login extends Component {
                 <div className="login_wrapper">
                     <div className="animate form login_form">
                         <section className="login_content">
+                            { this.props.showAlert && !this.props.isAuthenticated ? <Alert /> : null }
                             { authRedirect }
                             <form method="post" action="#">
                                 <h1>Login Form</h1>

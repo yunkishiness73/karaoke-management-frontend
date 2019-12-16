@@ -14,12 +14,7 @@ class AlertInfo extends Component {
         }
     }
 
-    componentDidMount() {
-        console.log('componentDidMount');
-    }
-
     render() {
-        console.log('render alert info');
         return (
             <AlertContainer>
                {

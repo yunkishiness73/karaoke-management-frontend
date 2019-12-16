@@ -18,7 +18,7 @@ export const fetchRoomList = () => {
                         dispatch(fetchRoomListSuccess(res.data));
                     })
                     .catch(err => {
-                        console.log(err);
+                        dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                     });
     }
 }
@@ -38,14 +38,9 @@ export const fetchRoomById = (id) => {
                             dispatch(fetchRoomByIdSuccess(res.data.data));
                     })
                     .catch(err => {
-                        console.log(err);
+                        dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                     });
     }
-}
-
-
-export const filterRoomTypeSuccess = (rooms) => {
-   
 }
 
 export const filterRoomType = (criteria) => {
@@ -55,7 +50,7 @@ export const filterRoomType = (criteria) => {
                             dispatch(fetchRoomListSuccess(res.data));
                           })
                           .catch(err => {
-                              console.log(err);
+                            dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                           })
     }
 }
@@ -70,7 +65,7 @@ export const checkIn = (id) => {
                             }
                           })
                           .catch(err => {
-
+                            dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                           })
     }
 }
@@ -82,12 +77,11 @@ export const checkOut = (id) => {
         return RoomService.checkOut(id, surCharge)
                           .then(res => {
                             if (res.status === StatusCode.SUCCESS) {
-                                console.log(res.data);
                                 dispatch(invoice.fetchInvoiceItemSuccess(res.data.data));
                             }
                           })
                           .catch(err => {
-
+                            dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                           })
     }
 }

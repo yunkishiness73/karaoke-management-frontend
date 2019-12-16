@@ -15,10 +15,8 @@ export const fetchItemListSuccess = (items) => {
 
 export const fetchItemList = () => {
     return dispatch => {
-      try {
         return ItemService.getItems()
                           .then(res => {
-                            console.log(res.status);
                             if (res.status === StatusCode.SUCCESS) {
                               dispatch(fetchItemListSuccess(res.data));
                             }
@@ -26,11 +24,7 @@ export const fetchItemList = () => {
                           .catch(err => {
                             dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                           })
-      } catch(error) {
-        console.log(error);
-      }
-        
-    }
+      } 
 }
 
 export const saveItemSuccess = (item) => {
@@ -52,7 +46,7 @@ export const saveItem = (item) => {
                         dispatch(fetchItemList());
                       })
                       .catch(err => {
-                        console.log(err);
+                        dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                       })
   }
 }
@@ -78,11 +72,10 @@ export const search = (keyword) => {
   return dispatch => {
     return ItemService.getItems(keyword)
                       .then(res => {
-                        console.log(res.data);
                         dispatch(fetchItemListSuccess(res.data))
                       })
                       .catch(err => {
-                        console.log(err);
+                        dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                       })
   }
 }
@@ -91,15 +84,10 @@ export const editItem = (item) => {
   return dispatch => {
     return ItemService.save(item)
                     .then(res => {
-                      console.log(res);
-                      //dispatch(saveItemSuccess(item));
-                    })
-                    .then(() => {
-                      console.log('then 2');
                       dispatch(fetchItemList());
                     })
                     .catch(err => {
-                      console.log(err);
+                      dispatch(alert.showAlert(AlertType.FAIL, err.data.message));
                     })
   }
 }

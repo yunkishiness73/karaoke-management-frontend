@@ -42,10 +42,10 @@ class RoomItem extends Component {
                     {
                         this.renderButton()
                     }
-                    <div style={{ marginTop: '15px', width: '100%' }}>
+                    {/* <div style={{ marginTop: '15px', width: '100%' }}>
                         <a className="btn" style={{ position: 'absolute', right: '4%' }}><i className="fa fa-pencil" /></a>
                         <a className="btn" style={{ position: 'absolute', right: '-3%' }}><i className="fa fa-remove" /></a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );

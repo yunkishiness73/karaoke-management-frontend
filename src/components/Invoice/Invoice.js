@@ -42,7 +42,6 @@ class Invoice extends Component {
     }
 
     render() {
-        console.log(this.props.match);
         return (
             <div className="card-deck right_col">
                 <div className="row">

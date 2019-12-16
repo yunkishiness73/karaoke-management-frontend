@@ -70,7 +70,6 @@ class Room extends Component {
     
 
     render() {
-        console.log(this.props.match);
         return (
             <div className="card-deck right_col">
                 <div className="row">
@@ -87,7 +86,6 @@ class Room extends Component {
 
     componentDidMount() {
         this.props.fetchRoomList();
-        console.log(this.props.roomData.rooms);
     }
 }
 

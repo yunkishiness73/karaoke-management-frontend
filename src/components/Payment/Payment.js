@@ -36,8 +36,6 @@ class Payment extends Component {
     renderMenu = () => {
         if (this.state.showMenu)
             return <Menu type='PAYMENT' />;
-        console.log('render menu');
-        console.log(this.props.invoiceItem);
         
         return <PaymentBoard invoiceItem={ this.props.invoiceItem }/>;
     }
@@ -54,7 +52,6 @@ class Payment extends Component {
     }
 
     render() {
-        console.log(this.props.invoiceItem);
         return (
             <div className="container-fluid mt-2 pt-2 right_col">
                 <div class="row">

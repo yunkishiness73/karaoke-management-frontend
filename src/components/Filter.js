@@ -56,9 +56,6 @@ class Filter extends Component {
 
         this.props.getViewType(viewType ? viewType : 'day');
         this.props.fetchSummaryInvoiceList(criteria);
-        // console.log('filter ' +this.state.filterType);
-        // console.log("from " +this.state.dateRange[0].format("YYYY-MM-DD"));
-        // console.log("to " +this.state.dateRange[1].format("YYYY-MM-DD"));
     }
 
     handleFilterChange = e => {
@@ -81,9 +78,7 @@ class Filter extends Component {
                 let currDay = moment().day();
                 let currDate = moment().date();
                 let startDateOfWeek = currDay === 0 ? currDate - 6 : currDate - currDay + 1;
-                // console.log('----');
                 // console.log(moment().set('date', startDateOfWeek));
-                // console.log('----');
                 dateRange = [moment().set('date', startDateOfWeek), moment()];
                 this.props.getDateRange(dateRange);
                 break;
@@ -131,10 +126,6 @@ class Filter extends Component {
     }
 
     render() {
-        // console.log("startDate: " + moment(this.state.startDate).format("YYYY-MM-DD"));
-        // console.log("endDate: " + this.state.endDate);
-        // console.log(this.state);
-        console.log('render filter');
         return (
             <div className="container-fluid mt-2 pt-2 right_col">
                 <div className="col-sm-12">

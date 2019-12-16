@@ -6,13 +6,10 @@ import NumberFormat from 'react-number-format';
 
 class OrderItem extends Component {
     constructor(props) {
-        console.log('constructor');
         super(props);
         this.state = {
             quantity: this.props.quantity
         }
-        console.log('quantity ' +this.state.quantity);
-        console.log(this.props);
     }
     
     componentWillMount() {
@@ -66,8 +63,6 @@ class OrderItem extends Component {
     }
 
     render() {
-        console.log('render order item');
-        console.log(this.state.quantity);
         return (
             <tr>
                 <td>{this.props.name}</td>
