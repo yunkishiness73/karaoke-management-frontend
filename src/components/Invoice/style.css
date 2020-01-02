@@ -1,8 +1,11 @@
 th,td {
-    /* text-align: center; */
+    text-align: center;
+}
+
+th {
+    color: #353b48;
 }
 
 .datepicker {
-    background-color: #efefef;
     height: 40px;
 }

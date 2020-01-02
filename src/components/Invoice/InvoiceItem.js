@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+import * as AppConstant from '../../constants/constants';
+import { Link } from 'react-router-dom';
+import NumberFormat from 'react-number-format';
 
 class InvoiceItem extends Component {
+    openInNewTab = url => {
+        window.open(url, "_blank");
+    }
+
     render() {
         return (
             <tr>
-                <td>1</td>
-                <td>09:30 SA</td>
-                <td>Nguyễn Kiệt Nà</td>
-                <td>#100000</td>
-                <td>V001</td>
-                <td>1.000.000 VNĐ</td>
-                <td>
-                    <a href="<?= base_url($val['chitiet']) ?>" className="btn btn-info">Xem chi tiết <i
-                        className="fa fa-eye"></i></a>
-                </td>
+                <td>{ this.props.pos + 1 }</td>
+                <td>{ moment(this.props.value.checkOut).format("DD/MM/YYYY hh:mm ") }</td>
+                <td>{ this.props.value.user.firstName + ' ' + this.props.value.user.lastName }</td>
+                <td><Link to="/invoices" style={{ cursor: 'pointer', color: '#1877F2', textDecoration: 'underline' }} onClick={() => this.openInNewTab(AppConstant.BILL_URL + this.props.value.invoicePdf)}>#{ this.props.value.id }</Link></td>
+                <td>{ this.props.value.room.name }</td>
+                <NumberFormat value={this.props.value.totalPrice} displayType={'text'} thousandSeparator={true} suffix={'₫'} renderText={value => <td>{value}</td>} />
             </tr>
         );
     }

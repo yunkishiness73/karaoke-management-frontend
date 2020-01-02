@@ -10,13 +10,12 @@ class TBody extends Component {
 
         if (Array.isArray(items) && items.length > 0) {
             return items.map((item, value) => {
-                return <RowItem value={item} key={item.id} />
+                return <RowItem type={this.props.type} value={item} key={item.id} />
             })
         }
     }
 
     render() {
-        // console.log(this.props.itemData.items);
         return (
             <tbody>
                {
@@ -41,7 +40,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchItemList: () =>  dispatch(actions.fetchItemList())
-    
     }
 }
 

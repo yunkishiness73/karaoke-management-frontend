@@ -1,0 +1,15 @@
+.side-bar:hover {
+	background: #536A7F;
+	border: 1px solid #536A7F;
+    color: #fff;
+    transition: all 0.5s;
+    height:45px;
+}
+
+.side-menu>li {
+    border-top: 1px solid #374d63;
+}
+
+.side-menu>li:last-child {
+    border-bottom: 1px solid #374d63;
+}

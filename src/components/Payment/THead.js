@@ -4,9 +4,12 @@ class THead extends Component {
     render() {
         return (
             <thead>
-                <tr><th colspan="2">Sản phẩm</th>
+                <tr>
+                    <th>Sản phẩm</th>
                     <th>Đơn vị tính</th>
-                    <th>Giá</th> 
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Thành Tiền</th>
                     <th></th>
                 </tr>
             </thead>

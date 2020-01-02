@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import TopNav from './components/TopNav';
-import Filter from './components/Filter';
 import SideBar from './components/SideBar';
 import Footer from './components/Footer';
 import Login from './components/Login/Login';
-import Room from './components/Room/Room';
-import Item from './components/Item/Item';
-import Invoice from './components/Invoice/Invoice';
+import routes from './routes';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import Alert from './components/Alert/AlertInfo';
+import { connect } from 'react-redux';
 
-// import LineChart from './LineChart';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,23 +20,58 @@ class App extends Component {
     document.body.classList.add('nav-md');
   }
 
-  render() {
-    return (
-        //<Login />
-      <div className="container body">
+  showContent = (routes) => {
+    if (routes.length > 0) {
+      return routes.map((route, key) => {
+        return (<Route
+          key={key}
+          exact={route.exact}
+          path={route.path}
+          component={route.main}
+        />);
+      })
+    }
+  }
+
+  isAuthenticated = () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      document.body.classList.add('login');
+      return <Redirect to="/login" />;
+    } else {
+      document.body.classList.remove('login');
+      return (
+        <div className="container body">
         <div className="main_container">
+        { this.props.showAlert ? <Alert /> : null }
           <SideBar />
           <TopNav />
-          {/* <Invoice /> */}
-          {/* <Room /> */}
-          <Item />
+          <Switch>
+            { this.showContent(routes) }
+          </Switch>
           <Footer />
         </div>
       </div>
-    );
+      )
+    }
   }
 
-
+  render() {
+    return (
+      <Router>
+        { this.isAuthenticated() }
+        <Route path="/login" exact="true" component={Login} />
+      </Router>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    showAlert: state.alert.showAlert,
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, null)(App);

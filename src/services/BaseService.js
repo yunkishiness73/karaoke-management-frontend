@@ -1,5 +1,4 @@
 import axios from 'axios';
-import AppConstant from '../constants/constants';
 
 class BaseService {
     constructor(props) {
@@ -22,12 +21,20 @@ class BaseService {
         return response;
     }
 
+    redirectTo = (document, path) => {
+        document.location = path;
+    };
+
     onError = error => {
         switch (error.response.status) {
             case 401:
-                break;
+                // this.removeHeader('token');
+                // localStorage.removeItem('token');
+                // localStorage.removeItem('displayName');
+                // this.redirectTo(document, '/login');
+                return Promise.reject(error.response)
             default:
-                return Promise.reject(error);
+                return Promise.reject(error.response);
         }
     }
 
@@ -53,12 +60,11 @@ class BaseService {
         });
     }
 
-    delete(endpoint, payload) {
+    delete(endpoint) {
         return this.service.request({
             method: 'DELETE',
             url: endpoint,
             responseType: 'json',
-            data: payload
         });
     }
 }

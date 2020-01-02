@@ -6,11 +6,12 @@ class RoomService extends BaseService {
         super(props);
         this.baseURL = AppConstant.API_URL;
         this.requestURL = this.baseURL + '/rooms';
-        let token = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraWV0bmd1eWVuNzM5OEBnbWFpbC5jb20iLCJleHAiOjE1NzI1NDgzMDMsImlhdCI6MTU3MjUzMDMwM30.l4Eyce3tMfSof7A-5ilStERZtiNDvwIQuJ0lCYGHrCJLKKY6RyqxqXJHYX9oL3zfJEcLZripCQ6597RvrVdbuQ';
-        this.setHeader('Authorization', token);
     }
 
-    getRoom() {
+    getRoom(id) {
+        if (id) 
+            return this.get(`${this.baseURL}/rooms/${id}`);
+            
         return this.get(`${this.baseURL}/rooms`);
     }
 
@@ -20,6 +21,31 @@ class RoomService extends BaseService {
         if (criteria) 
             endpoint = `${this.requestURL}/?${criteria}`;
 
+        return this.get(endpoint);
+    }
+
+    checkIn(id) {
+        let endpoint = '';
+
+        if (!id)
+            return null;
+        
+        endpoint = `${this.requestURL}/checkIn/${id}`;
+        
+        return this.get(endpoint);
+    }
+
+    checkOut(id, surCharge) {
+        let endpoint = '';
+
+        if (!id)
+            return null;
+        
+        if (surCharge)
+            endpoint = `${this.requestURL}/checkOut/${id}?&surCharge=${surCharge}`;
+        else
+            endpoint = `${this.requestURL}/checkOut/${id}`;
+        
         return this.get(endpoint);
     }
     
